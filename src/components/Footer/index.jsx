@@ -13,7 +13,12 @@ import {
 
 const Footer = (props) => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useImmer();
+  const [inputValue, setInputValue] = useImmer('');
+
+  const reset = () => {
+    dispatch(resetAction());
+    setInputValue('');
+  };
 
   return (
     <Root>
@@ -32,7 +37,7 @@ const Footer = (props) => {
         </Button>
 
         <Button
-          onClick={() => dispatch(resetAction())}
+          onClick={reset}
         >
           Reset
         </Button>
