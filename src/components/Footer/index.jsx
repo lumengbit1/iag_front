@@ -26,6 +26,7 @@ const Footer = (props) => {
         onChange={(event) => setInputValue(event.target.value)}
         value={inputValue}
         maxLength="8"
+        placeholder="Type Here"
       />
 
       <ButtonContainer>
