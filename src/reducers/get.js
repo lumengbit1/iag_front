@@ -5,9 +5,6 @@ import {
   get_failed,
   get_hint,
   get_hint_loading,
-  post_guess,
-  post_guess_successed,
-  post_failed,
 } from './actions';
 
 const initialState = fromJS({
@@ -23,7 +20,7 @@ const initialState = fromJS({
   },
 });
 
-const reducer = handleActions(
+const getReducer = handleActions(
   {
     [get_hint]: (state) => state,
     [get_hint_loading]: (state, action) => {
@@ -38,19 +35,8 @@ const reducer = handleActions(
       const errors = fromJS(action.payload.data);
       return state.set('errors', errors);
     },
-    [post_guess]: (state) => state,
-    [post_guess_successed]: (state, action) => {
-      const records = fromJS(action.payload.data);
-      return state
-        .setIn(['results', 'correct'], records.get('correct'))
-        .setIn(['results', 'highlight'], records.get('highlight'));
-    },
-    [post_failed]: (state, action) => {
-      const errors = fromJS(action.payload.data);
-      return state.set('errors', errors);
-    },
   },
   initialState,
 );
 
-export default reducer;
+export default getReducer;

@@ -1,43 +1,33 @@
 import React from 'react';
-import { useImmer } from 'use-immer';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
-import { List } from 'immutable';
-import { getHintAction, postGuessAction } from '../../reducers/actions';
+import { getHintAction } from '../../reducers/actions';
 import {
   HomePage,
-  Hint,
-  Input,
-  Submit,
+  Container,
+  Attempt,
 } from './Home.style';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useImmer();
 
-  const hintValue = useSelector((state) => state.getIn(['value', 'results', 'hint'])) || List();
+  const reponseValue = useSelector((state) => state.get('postReducer'));
 
   React.useEffect(() => {
     dispatch(getHintAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <HomePage>
-      <Hint>
-        {hintValue}
-      </Hint>
-
-      <Input
-        format="########"
-        onChange={(event) => setInputValue(event.target.value)}
-        value={inputValue}
-      />
-
-      <Submit
-        onClick={() => dispatch(postGuessAction(_.join(hintValue.toJS(), ''), inputValue))}
-      >
-        Submit
-      </Submit>
+      {!reponseValue.isEmpty() && reponseValue.map((res, index) => (
+        <Container key={res.get('answer')}>
+          User Attempt&nbsp;
+          {index + 1}
+          &nbsp;--------&gt;
+          <Attempt>
+            {res.get('answer')}
+          </Attempt>
+        </Container>
+      ))}
     </HomePage>
   );
 };
