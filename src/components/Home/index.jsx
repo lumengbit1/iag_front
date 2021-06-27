@@ -1,34 +1,45 @@
 import React from 'react';
-import PropertyList from '../PropertyList';
+import { useImmer } from 'use-immer';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
+import { List } from 'immutable';
+import { getHintAction, postGuessAction } from '../../reducers/actions';
 import {
   HomePage,
-  PropertiesArea,
-  Title,
-  Block,
+  Hint,
+  Input,
+  Submit,
 } from './Home.style';
 
-const Home = () => (
-  <HomePage>
-    <PropertiesArea>
-      <Title>
-        Results
-      </Title>
+const Home = () => {
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useImmer();
 
-      <Block>
-        <PropertyList type="results" />
-      </Block>
-    </PropertiesArea>
+  const hintValue = useSelector((state) => state.getIn(['value', 'results', 'hint'])) || List();
 
-    <PropertiesArea>
-      <Title>
-        Saved Properties
-      </Title>
+  React.useEffect(() => {
+    dispatch(getHintAction());
+  }, []);
 
-      <Block>
-        <PropertyList type="saved" />
-      </Block>
-    </PropertiesArea>
-  </HomePage>
-);
+  return (
+    <HomePage>
+      <Hint>
+        {hintValue}
+      </Hint>
+
+      <Input
+        format="########"
+        onChange={(event) => setInputValue(event.target.value)}
+        value={inputValue}
+      />
+
+      <Submit
+        onClick={() => dispatch(postGuessAction(_.join(hintValue.toJS(), ''), inputValue))}
+      >
+        Submit
+      </Submit>
+    </HomePage>
+  );
+};
 
 export default Home;

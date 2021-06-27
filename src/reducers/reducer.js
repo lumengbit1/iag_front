@@ -1,64 +1,53 @@
 import { handleActions } from 'redux-actions';
 import { fromJS } from 'immutable';
 import {
-  get_results_successed,
-  get_saved_successed,
+  get_hint_successed,
   get_failed,
-  get_results,
-  get_saved,
-  saved_loading,
-  results_loading,
-  add_property,
-  remove_property,
+  get_hint,
+  get_hint_loading,
+  post_guess,
+  post_guess_successed,
+  post_failed,
 } from './actions';
 
 const initialState = fromJS({
-  results: [],
-  saved: [],
+  results: {
+    correct: false,
+    highlight: [],
+    hint: '',
+    answer: '',
+  },
   errors: {},
   loading: {
-    saved: undefined,
-    results: undefined,
+    hint: undefined,
   },
 });
 
 const reducer = handleActions(
   {
-    [get_results]: (state) => state,
-    [get_saved]: (state) => state,
-    [saved_loading]: (state, action) => {
+    [get_hint]: (state) => state,
+    [get_hint_loading]: (state, action) => {
       const records = fromJS(action.payload);
-      return state.setIn(['loading', 'saved'], records);
+      return state.setIn(['loading', 'hint'], records);
     },
-    [results_loading]: (state, action) => {
-      const records = fromJS(action.payload);
-      return state.setIn(['loading', 'results'], records);
-    },
-    [get_results_successed]: (state, action) => {
+    [get_hint_successed]: (state, action) => {
       const records = fromJS(action.payload.data);
-      return state.set('results', records);
-    },
-    [get_saved_successed]: (state, action) => {
-      const records = fromJS(action.payload.data);
-      return state.set('saved', records);
+      return state.setIn(['results', 'hint'], records.get('hint'));
     },
     [get_failed]: (state, action) => {
       const errors = fromJS(action.payload.data);
       return state.set('errors', errors);
     },
-    [add_property]: (state, action) => {
-      const selectedData = state.get('results').find((item) => item.get('id') === action.payload);
-
-      if (state.get('saved').find((item) => item.get('id') === selectedData.get('id'))) {
-        return state;
-      }
-
-      return state.update('saved', (val) => val.push(selectedData));
+    [post_guess]: (state) => state,
+    [post_guess_successed]: (state, action) => {
+      const records = fromJS(action.payload.data);
+      return state
+        .setIn(['results', 'correct'], records.get('correct'))
+        .setIn(['results', 'highlight'], records.get('highlight'));
     },
-    [remove_property]: (state, action) => {
-      const selectedData = state.get('saved').find((item) => item.get('id') === action.payload);
-
-      return state.update('saved', (item) => item.filter((val) => val.get('id') !== selectedData.get('id')));
+    [post_failed]: (state, action) => {
+      const errors = fromJS(action.payload.data);
+      return state.set('errors', errors);
     },
   },
   initialState,

@@ -2,44 +2,44 @@ import axios from 'axios';
 import { createAction } from 'redux-actions';
 import settings from '../settings';
 
-export const get_results = createAction('GET_RESULTS_REQUEST');
+export const get_hint = createAction('GET_HINT_REQUEST');
 
-export const saved_loading = createAction('SAVED_LOADING', (loading) => loading);
+export const post_guess = createAction('POST_GUESS');
 
-export const results_loading = createAction('RESULTS_LOADING', (loading) => loading);
+export const get_hint_loading = createAction('HINT_LOADING', (loading) => loading);
 
-export const get_saved = createAction('GET_SAVED_REQUEST');
+export const get_hint_successed = createAction('GET_HINT_RESOLVED');
 
-export const get_results_successed = createAction('GET_RESULTS_RESOLVED');
-
-export const get_saved_successed = createAction('GET_SAVED_RESOLVED');
+export const post_guess_successed = createAction('POST_GUESS_RESOLVED');
 
 export const get_failed = createAction('GET_REJECTED');
 
-export const add_property = createAction('ADD_PROPERTY', (params) => params);
+export const post_failed = createAction('POST_REJECTED');
 
-export const remove_property = createAction('REMOVE_PROPERTY', (params) => params);
+export const getHintAction = () => (dispatch) => {
+  dispatch(get_hint());
+  dispatch(get_hint_loading(true));
 
-export const getResultsAction = () => (dispatch) => {
-  dispatch(get_results());
-  dispatch(results_loading(true));
-
-  return axios.get(`${settings.RESULTS_BASE_API_DOMAIN}`)
+  return axios.get(`${settings.BASE_API_DOMAIN}/hint`)
     .then((response) => {
-      dispatch(results_loading(false));
-      return dispatch(get_results_successed(response));
+      dispatch(get_hint_loading(false));
+      return dispatch(get_hint_successed(response));
     })
     .catch((error) => dispatch(get_failed(error)));
 };
 
-export const getSavedAction = () => (dispatch) => {
-  dispatch(get_saved());
-  dispatch(saved_loading(true));
+export const postGuessAction = (hintValue, inputValue) => (dispatch) => {
+  dispatch(post_guess());
 
-  return axios.get(`${settings.SAVED_BASE_API_DOMAIN}`)
-    .then((response) => {
-      dispatch(saved_loading(false));
-      return dispatch(get_saved_successed(response));
-    })
-    .catch((error) => dispatch(get_failed(error)));
+  return axios.post(
+    `${settings.BASE_API_DOMAIN}/guess`,
+    JSON.stringify({ hint: hintValue, answer: inputValue }),
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  )
+    .then((response) => dispatch(post_guess_successed(response)))
+    .catch((error) => dispatch(post_failed(error)));
 };
