@@ -14,6 +14,10 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Attempt = styled.div`
@@ -28,6 +32,12 @@ export const Attempt = styled.div`
 
   font-size: 20px;
   margin-left: 20px;
+`;
+
+export const AttemptText = styled.div`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Num = styled.span`
