@@ -8,10 +8,11 @@ import thunk from 'redux-thunk';
 import { combineReducers } from 'redux-immutable';
 import App from './App';
 import Routes from './router/routers';
-import eventList from './reducers/reducer';
+import getReducer from './reducers/get';
+import postReducer from './reducers/post';
 import reportWebVitals from './reportWebVitals';
 
-const store = createStore(combineReducers({ value: eventList }), applyMiddleware(thunk));
+const store = createStore(combineReducers({ getReducer, postReducer }), applyMiddleware(thunk));
 
 ReactDOM.render(
   <React.StrictMode>

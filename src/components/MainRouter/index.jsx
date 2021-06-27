@@ -1,27 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHintAction } from '../../reducers/actions';
 import Header from '../Header';
+import Footer from '../Footer';
 import {
   MainBodyContainer,
   Root,
 } from './MainRouter.styles';
 
 const MainRouter = ({ component: Component, ...rest }) => {
-  const cloned_props = { ...rest };
-  const headerProps = cloned_props;
+  const dispatch = useDispatch();
+
+  const hintValue = useSelector((state) => state.getIn(['getReducer', 'results', 'hint']));
+
+  React.useEffect(() => {
+    dispatch(getHintAction());
+  }, [dispatch]);
+
+  const cloned_props = { hintValue, ...rest };
 
   const _component = () => (
     <Root>
-      <Header
-        {...headerProps}
-      />
+      <Header {...cloned_props} />
 
       <MainBodyContainer>
         <Component
           {...cloned_props}
         />
       </MainBodyContainer>
+
+      <Footer {...cloned_props} />
     </Root>
   );
 
