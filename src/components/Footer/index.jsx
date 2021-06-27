@@ -20,6 +20,11 @@ const Footer = (props) => {
     setInputValue('');
   };
 
+  const submit = () => {
+    dispatch(postGuessAction(_.join(props.hintValue.toJS(), ''), inputValue));
+    setInputValue('');
+  };
+
   return (
     <Root>
       <Input
@@ -31,7 +36,7 @@ const Footer = (props) => {
 
       <ButtonContainer>
         <Button
-          onClick={() => dispatch(postGuessAction(_.join(props.hintValue.toJS(), ''), inputValue))}
+          onClick={submit}
           disabled={_.size(inputValue) < 8}
         >
           Submit

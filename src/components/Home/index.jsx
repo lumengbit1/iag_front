@@ -6,6 +6,7 @@ import {
   Container,
   Attempt,
   Num,
+  AttemptText,
 } from './Home.style';
 
 const Home = () => {
@@ -18,7 +19,9 @@ const Home = () => {
         <Container key={index}>
           User Attempt&nbsp;
           {index + 1}
-          &nbsp;--------&gt;
+          <AttemptText>
+            &nbsp;--------&gt;
+          </AttemptText>
           <Attempt>
             {_.split(res.get('answer'), '').map((item, idx) => (
               <Num

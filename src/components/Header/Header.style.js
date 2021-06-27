@@ -22,6 +22,16 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   margin: 20px 0;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+export const HintText = styled.div`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Hint = styled.div`

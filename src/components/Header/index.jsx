@@ -5,6 +5,7 @@ import {
   Container,
   Hint,
   Title,
+  HintText,
 } from './Header.style';
 
 const Header = (props) => (
@@ -13,7 +14,10 @@ const Header = (props) => (
       Guess The Password
     </Title>
     <Container>
-      Hint --------&gt;
+      Hint
+      <HintText>
+        --------&gt;
+      </HintText>
       <Hint>
         {props.hintValue}
       </Hint>
