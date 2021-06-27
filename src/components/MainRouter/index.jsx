@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
-import _ from 'lodash';
-// import Header from '../Header';
+import Header from '../Header';
 import {
   MainBodyContainer,
   Root,
@@ -10,13 +9,14 @@ import {
 
 const MainRouter = ({ component: Component, ...rest }) => {
   const cloned_props = { ...rest };
-  // const headerProps = cloned_props;
+  const headerProps = cloned_props;
 
   const _component = () => (
     <Root>
-      {/* <Header
+      <Header
         {...headerProps}
-      /> */}
+      />
+
       <MainBodyContainer>
         <Component
           {...cloned_props}
@@ -25,16 +25,10 @@ const MainRouter = ({ component: Component, ...rest }) => {
     </Root>
   );
 
-  _.assign(cloned_props, { component: _component });
-
   return (
     <Route
       {...rest}
-      render={() => (
-        <Component
-          {...cloned_props}
-        />
-      )}
+      render={_component}
     />
   );
 };
