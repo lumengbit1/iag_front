@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { useImmer } from 'use-immer';
 import { useDispatch } from 'react-redux';
 import _ from 'lodash';
-import { postGuessAction } from '../../reducers/actions';
+import { postGuessAction, resetAction } from '../../reducers/actions';
 import {
   Root,
   Input,
@@ -32,7 +32,7 @@ const Footer = (props) => {
         </Button>
 
         <Button
-          onClick={() => dispatch(postGuessAction(_.join(props.hintValue.toJS(), ''), inputValue))}
+          onClick={() => dispatch(resetAction())}
         >
           Reset
         </Button>

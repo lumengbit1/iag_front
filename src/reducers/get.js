@@ -5,6 +5,8 @@ import {
   get_failed,
   get_hint,
   get_hint_loading,
+  reset,
+  reset_successed,
 } from './actions';
 
 const initialState = fromJS({
@@ -35,6 +37,8 @@ const getReducer = handleActions(
       const errors = fromJS(action.payload.data);
       return state.set('errors', errors);
     },
+    [reset]: (state) => state,
+    [reset_successed]: (state) => state,
   },
   initialState,
 );
