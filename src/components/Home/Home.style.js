@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const HomePage = styled.div`
   display: flex;
@@ -28,4 +28,11 @@ export const Attempt = styled.div`
 
   font-size: 20px;
   margin-left: 20px;
+`;
+
+export const Num = styled.span`
+  ${(props) => props.highlight && css`
+    color: white;
+    background-color: green;
+  `}
 `;

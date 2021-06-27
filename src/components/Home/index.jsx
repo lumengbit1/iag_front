@@ -1,30 +1,34 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getHintAction } from '../../reducers/actions';
+import { useSelector } from 'react-redux';
+import _ from 'lodash';
 import {
   HomePage,
   Container,
   Attempt,
+  Num,
 } from './Home.style';
 
 const Home = () => {
-  const dispatch = useDispatch();
-
   const reponseValue = useSelector((state) => state.get('postReducer'));
-
-  React.useEffect(() => {
-    dispatch(getHintAction());
-  }, [dispatch]);
 
   return (
     <HomePage>
       {!reponseValue.isEmpty() && reponseValue.map((res, index) => (
-        <Container key={res.get('answer')}>
+        // eslint-disable-next-line react/no-array-index-key
+        <Container key={index}>
           User Attempt&nbsp;
           {index + 1}
           &nbsp;--------&gt;
           <Attempt>
-            {res.get('answer')}
+            {_.split(res.get('answer'), '').map((item, idx) => (
+              <Num
+                // eslint-disable-next-line react/no-array-index-key
+                key={idx}
+                highlight={!_.isUndefined(res.get('highlight').find((val) => val === idx))}
+              >
+                {item}
+              </Num>
+            ))}
           </Attempt>
         </Container>
       ))}

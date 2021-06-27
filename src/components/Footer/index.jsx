@@ -13,7 +13,12 @@ import {
 
 const Footer = (props) => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useImmer();
+  const [inputValue, setInputValue] = useImmer('');
+
+  const reset = () => {
+    dispatch(resetAction());
+    setInputValue('');
+  };
 
   return (
     <Root>
@@ -21,6 +26,7 @@ const Footer = (props) => {
         onChange={(event) => setInputValue(event.target.value)}
         value={inputValue}
         maxLength="8"
+        placeholder="Type Here"
       />
 
       <ButtonContainer>
@@ -32,7 +38,7 @@ const Footer = (props) => {
         </Button>
 
         <Button
-          onClick={() => dispatch(resetAction())}
+          onClick={reset}
         >
           Reset
         </Button>
