@@ -4,6 +4,7 @@ import {
   post_guess,
   post_guess_successed,
   post_failed,
+  clear,
 } from './actions';
 
 const initialState = List();
@@ -19,6 +20,7 @@ const postReducer = handleActions(
       const errors = fromJS(action.payload.data);
       return state.set('errors', errors);
     },
+    [clear]: () => initialState,
   },
   initialState,
 );
