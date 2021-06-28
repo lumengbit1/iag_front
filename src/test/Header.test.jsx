@@ -6,7 +6,7 @@ import { render } from '@testing-library/react';
 import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
-import Home from '../components/Home';
+import Header from '../components/Header';
 import getReducer from '../reducers/get';
 import postReducer from '../reducers/post';
 
@@ -27,11 +27,20 @@ const mockData = fromJS([
   },
 ]);
 
+const mockhint = fromJS([
+  {
+    correct: false,
+    highlight: [],
+    hint: 'test',
+    answer: '1111',
+  },
+]);
+
 describe('Render Test', () => {
   it('case: expect rendering correct', () => {
     const { container } = render(
       <Provider store={store}>
-        <Home reponseValue={mockData} />
+        <Header reponseValue={mockData} hintValue={mockhint} />
       </Provider>,
     );
 

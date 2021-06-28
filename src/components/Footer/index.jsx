@@ -1,6 +1,6 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { useImmer } from 'use-immer';
+// import { useImmer } from 'use-immer';
 import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { postGuessAction, resetAction } from '../../reducers/actions';
@@ -14,7 +14,7 @@ import {
 
 const Footer = (props) => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useImmer('');
+  const [inputValue, setInputValue] = React.useState('');
 
   const isCorrect = !props.reponseValue.isEmpty() && props.reponseValue.last().get('correct');
 
@@ -31,6 +31,7 @@ const Footer = (props) => {
   return (
     <Root>
       <Input
+        data-testid="input"
         onChange={(event) => setInputValue(event.target.value)}
         value={inputValue}
         maxLength="8"
@@ -43,6 +44,7 @@ const Footer = (props) => {
       )}
       <ButtonContainer>
         <Button
+          data-testid="submit"
           onClick={submit}
           disabled={_.size(inputValue) < 8}
         >
@@ -50,6 +52,7 @@ const Footer = (props) => {
         </Button>
 
         <Button
+          data-testid="reset"
           onClick={reset}
         >
           Reset
