@@ -1,7 +1,7 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { useImmer } from 'use-immer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { postGuessAction, resetAction } from '../../reducers/actions';
 import {
@@ -15,9 +15,8 @@ import {
 const Footer = (props) => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useImmer('');
-  const reponseValue = useSelector((state) => state.get('postReducer'));
 
-  const isCorrect = !reponseValue.isEmpty() && reponseValue.last().get('correct');
+  const isCorrect = !props.reponseValue.isEmpty() && props.reponseValue.last().get('correct');
 
   const reset = () => {
     dispatch(resetAction());
@@ -62,6 +61,7 @@ const Footer = (props) => {
 
 Footer.propTypes = {
   hintValue: ImmutablePropTypes.list.isRequired,
+  reponseValue: ImmutablePropTypes.list.isRequired,
 };
 
 export default Footer;
