@@ -1,7 +1,7 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { useImmer } from 'use-immer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { postGuessAction, resetAction } from '../../reducers/actions';
 import {
@@ -9,11 +9,15 @@ import {
   Input,
   Button,
   ButtonContainer,
+  Text,
 } from './Footer.style';
 
 const Footer = (props) => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useImmer('');
+  const reponseValue = useSelector((state) => state.get('postReducer'));
+
+  const isCorrect = !reponseValue.isEmpty() && reponseValue.last().get('correct');
 
   const reset = () => {
     dispatch(resetAction());
@@ -33,7 +37,11 @@ const Footer = (props) => {
         maxLength="8"
         placeholder="Type Here"
       />
-
+      {isCorrect && (
+        <Text>
+          Congratulations!
+        </Text>
+      )}
       <ButtonContainer>
         <Button
           onClick={submit}

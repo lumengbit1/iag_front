@@ -45,3 +45,8 @@ export const Button = styled.button`
 export const ButtonContainer = styled.div`
   display: flex;
 `;
+
+export const Text = styled.div`
+  color: red;
+  text-transform: uppercase;
+`;
