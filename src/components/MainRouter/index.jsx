@@ -14,12 +14,13 @@ const MainRouter = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch();
 
   const hintValue = useSelector((state) => state.getIn(['getReducer', 'results', 'hint']));
+  const reponseValue = useSelector((state) => state.get('postReducer'));
 
   React.useEffect(() => {
     dispatch(getHintAction());
   }, [dispatch]);
 
-  const cloned_props = { hintValue, ...rest };
+  const cloned_props = { hintValue, reponseValue, ...rest };
 
   const _component = () => (
     <Root>
