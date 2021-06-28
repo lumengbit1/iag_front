@@ -14,8 +14,6 @@ export const post_guess_successed = createAction('POST_GUESS_RESOLVED');
 
 export const get_failed = createAction('GET_REJECTED');
 
-export const post_failed = createAction('POST_REJECTED');
-
 export const reset = createAction('RESET_REQUEST');
 
 export const reset_successed = createAction('RESET_RESOLVED');
@@ -46,8 +44,7 @@ export const postGuessAction = (hintValue, inputValue) => (dispatch) => {
       },
     },
   )
-    .then((response) => dispatch(post_guess_successed(response)))
-    .catch((error) => dispatch(post_failed(error)));
+    .then((response) => dispatch(post_guess_successed(response)));
 };
 
 export const resetAction = () => (dispatch) => {

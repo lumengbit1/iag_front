@@ -5,10 +5,12 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux-immutable';
-import Router from '../router/routers';
-import eventList from '../reducers/reducer';
+import Routes from '../router/routers';
+import getReducer from '../reducers/get';
+import postReducer from '../reducers/post';
+import App from '../App';
 
-const store = createStore(combineReducers({ value: eventList }), applyMiddleware(thunk));
+const store = createStore(combineReducers({ getReducer, postReducer }), applyMiddleware(thunk));
 
 describe('Route Test', () => {
   it('Route Test', () => {
@@ -16,7 +18,9 @@ describe('Route Test', () => {
       .create(
         <Provider store={store}>
           <MemoryRouter>
-            <Router />
+            <App>
+              <Routes />
+            </App>
           </MemoryRouter>
         </Provider>,
       )

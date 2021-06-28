@@ -2,31 +2,79 @@
 
 exports[`Route Test Route Test 1`] = `
 <div
-  className="sc-iCoGMd bKHGAZ"
+  className="App"
 >
   <div
-    className="sc-pNWdM hlbGIy"
+    className="sc-bqGGPW ikyQLK"
   >
     <div
-      className="sc-fujyAs bAoGlv"
+      className="sc-jSFjdj ATQMM"
     >
-      Results
+      <div
+        className="sc-gKAaRy hUdYir"
+      >
+        Guess The Password
+      </div>
+      <div
+        className="sc-iCoGMd goJYTe"
+      >
+        Hint
+        <div
+          className="sc-fujyAs esqbkv"
+        >
+          --------&gt;
+        </div>
+        <div
+          className="sc-pNWdM fsRUDu"
+        >
+          
+        </div>
+      </div>
     </div>
     <div
-      className="sc-jrsJWt hFErOw"
-    />
-  </div>
-  <div
-    className="sc-pNWdM hlbGIy"
-  >
-    <div
-      className="sc-fujyAs bAoGlv"
+      className="sc-ksluID dkJTen"
     >
-      Saved Properties
+      <div
+        className="sc-bdnxRM dUuamg"
+      />
     </div>
     <div
-      className="sc-jrsJWt hFErOw"
-    />
+      className="sc-jrsJWt cjfHrb"
+    >
+      <input
+        className="sc-kEqXSa dEJNTC"
+        data-testid="input"
+        inputMode="numeric"
+        maxLength="8"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseUp={[Function]}
+        placeholder="Type Here"
+        type="text"
+        value=""
+      />
+      <div
+        className="sc-crzoAE bKzEsk"
+      >
+        <button
+          className="sc-iqAclL hOuSEi"
+          data-testid="submit"
+          disabled={true}
+          onClick={[Function]}
+        >
+          Submit
+        </button>
+        <button
+          className="sc-iqAclL hOuSEi"
+          data-testid="reset"
+          onClick={[Function]}
+        >
+          Reset
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 `;
