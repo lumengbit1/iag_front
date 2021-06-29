@@ -42,12 +42,10 @@ describe('Test reducer', () => {
       },
     });
 
-    expect(
-      reducer(initialState, {
-        type: 'GET_HINT_RESOLVED',
-        payload,
-      }),
-    ).toEqual(expectedState);
+    expect(reducer(initialState, {
+      type: 'GET_HINT_RESOLVED',
+      payload,
+    })).toEqual(expectedState);
   });
 
   it('3.should handle get_hint', () => {

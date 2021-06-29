@@ -9,11 +9,9 @@ describe('Test reducer', () => {
   });
 
   it('2.should handle post_guess', () => {
-    expect(
-      reducer(initialState, {
-        type: 'POST_GUESS',
-      }),
-    ).toEqual(initialState);
+    expect(reducer(initialState, {
+      type: 'POST_GUESS',
+    })).toEqual(initialState);
   });
 
   it('3.should handle post_guess_successed', () => {
@@ -45,12 +43,10 @@ describe('Test reducer', () => {
       },
     }]);
 
-    expect(
-      reducer(initialState, {
-        type: 'POST_GUESS_RESOLVED',
-        payload,
-      }),
-    ).toEqual(expectedState);
+    expect(reducer(initialState, {
+      type: 'POST_GUESS_RESOLVED',
+      payload,
+    })).toEqual(expectedState);
   });
 
   it('4.should handle clear', () => {
