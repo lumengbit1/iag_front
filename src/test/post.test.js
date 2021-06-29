@@ -50,10 +50,8 @@ describe('Test reducer', () => {
   });
 
   it('4.should handle clear', () => {
-    expect(
-      reducer(initialState, {
-        type: 'CLEAR',
-      }),
-    ).toEqual(initialState);
+    expect(reducer(initialState, {
+      type: 'CLEAR',
+    })).toEqual(initialState);
   });
 });

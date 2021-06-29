@@ -49,11 +49,9 @@ describe('Test reducer', () => {
   });
 
   it('3.should handle get_hint', () => {
-    expect(
-      reducer(initialState, {
-        type: 'GET_HINT_REQUEST',
-      }),
-    ).toEqual(initialState);
+    expect(reducer(initialState, {
+      type: 'GET_HINT_REQUEST',
+    })).toEqual(initialState);
   });
 
   it('4.should handle get_failed', () => {
@@ -73,12 +71,10 @@ describe('Test reducer', () => {
         hint: undefined,
       },
     });
-    expect(
-      reducer(initialState, {
-        type: 'GET_REJECTED',
-        payload,
-      }),
-    ).toEqual(expectedState);
+    expect(reducer(initialState, {
+      type: 'GET_REJECTED',
+      payload,
+    })).toEqual(expectedState);
   });
 
   it('5.should handle get_hint_loading', () => {
@@ -96,27 +92,21 @@ describe('Test reducer', () => {
         hint: true,
       },
     });
-    expect(
-      reducer(initialState, {
-        type: 'HINT_LOADING',
-        payload,
-      }),
-    ).toEqual(expectedState);
+    expect(reducer(initialState, {
+      type: 'HINT_LOADING',
+      payload,
+    })).toEqual(expectedState);
   });
 
   it('6.should handle reset', () => {
-    expect(
-      reducer(initialState, {
-        type: 'RESET_REQUEST',
-      }),
-    ).toEqual(initialState);
+    expect(reducer(initialState, {
+      type: 'RESET_REQUEST',
+    })).toEqual(initialState);
   });
 
   it('7.should handle reset_successed', () => {
-    expect(
-      reducer(initialState, {
-        type: 'RESET_RESOLVED',
-      }),
-    ).toEqual(initialState);
+    expect(reducer(initialState, {
+      type: 'RESET_RESOLVED',
+    })).toEqual(initialState);
   });
 });
