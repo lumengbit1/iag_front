@@ -1,4 +1,4 @@
-# BM Program
+# IAG Frontend Program
 
 ## Getting started
 
